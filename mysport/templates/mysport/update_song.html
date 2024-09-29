@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Song</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'mysport/style.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 style="color: white; text-align: center;">Update Song</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group" style="width: 400px; margin-left: auto; margin-right: auto;">
+                <label for="title" style="color: white;">Title:</label>
+                <input type="text" name="title" value="{{ mysong.title }}" class="form-control" required>
+            </div>
+            <div class="form-group" style="width: 400px; margin-left: auto; margin-right: auto;">
+                <label for="artist" style="color: white;">Artist:</label>
+                <input type="text" name="artist" value="{{ mysong.artist }}" class="form-control" required>
+            </div>
+            <div class="form-group" style="width: 400px; margin-left: auto; margin-right: auto;">
+                <label for="album" style="color: white;">Album:</label>
+                <input type="text" name="album" value="{{ myalbum.title }}" class="form-control" required>
+            </div>
+            <div class="form-group" style="width: 400px; margin-left: auto; margin-right: auto;">
+                <label for="duration" style="color: white;">Duration:</label>
+                <input type="text" name="duration" value="{{ mysong.duration }}" class="form-control" required>
+            </div>
+            <div class="form-group" style="width: 400px; margin-left: auto; margin-right: auto;">
+                <label for="availability" style="color: white;">Availability:</label>
+                <input type="text" name="availability" value="{{ mysong.availability }}" class="form-control" required>
+            </div>
+            <div class="form-group" style="width: 400px; margin-left: auto; margin-right: auto;">
+                <label for="release_date" style="color: white;">Release Date:</label>
+                <input type="date" name="release_date" value="{{ mysong.release_date }}" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-left: 450px; margin-bottom: 20px;width: 200px;">Update Song</button>
+        </form>
+        <a href="{% url 'music' %}" class="btn btn-secondary" style="margin-left: 450px; width: 200px;">Back</a>
+    </div>
+</body>
+</html>

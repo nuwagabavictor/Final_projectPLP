@@ -1,0 +1,73 @@
+body{
+    background-image: url(../images/vic.jpeg);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.card-img-top {
+    max-width: 100px; 
+    height: 100px; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn-block1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.card-title{
+    text-align: center;
+}
+.card-text{
+    text-align: center;
+    margin-left: 20px;
+}
+.form-control{
+    background-color: rgb(224, 234, 224);
+}
+#navbarNav{
+    background-color: rgb(201, 206, 201);
+    border-radius: 5px;
+}
+#navbarNav:hover{
+    color: blue;
+    background-color: white;
+}
+.navbar{
+    background-color: rgb(18, 33, 198);
+}
+.btn-lg{
+    padding: 8px;
+    margin: 10px;
+    margin-top: -10px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+.btn-block{
+    padding: 20px;
+    margin-top: 20px;
+    background-color: rgb(16, 75, 201);
+    margin-left: 150px;
+    width: 150px;
+}
+.form-group{
+    padding: 10px;
+    display: block;
+    justify-content: center;
+}
+.cc{
+    padding: 5px;
+    margin: 10px;
+    border-radius: 8px;
+    width: 80px;
+    background-color: rgb(34, 22, 203);
+    color: white;
+}
+.cc a{
+    text-decoration: none;
+    color: white;
+}
+
+

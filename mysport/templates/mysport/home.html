@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VicSpotify - Music Platform</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'mysport/style.css' %}">
+</head>
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-green">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Music Platform</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+            <div class="collapse navbar-collapse" id="navbarNav">
+                {% block sidebar %}
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'home' %}" style="color: blue;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'index' %}" style="color: blue;" >Artists</a> 
+                        {% comment %} href="{% url 'mysport:add' %} {% endcomment %}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'album' %}" style="color: blue;">Albums</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'music' %}" style="color: blue;">Songs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'log' %}" style="color: blue;">LogOut</a>
+                    </li>
+                    {% comment %} <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'sign' %}" style="color: blue;">SignUp</a>
+                    </li> {% endcomment %}
+                </ul>
+                {% endblock sidebar %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-light text-dark text-center py-1">
+        <div class="container">
+            <h1 class="display-6">Welcome to Our Music Platform</h1>
+            <p class="lead">Discover, listen, and share your favorite music with the world.</p>
+            <a href="{% url 'music' %}" class="btn btn-primary btn-lg">Explore Music</a>
+        </div>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <form method="get" class="col-md">
+          {% csrf_token %}
+          <div class=" input-group mb-0">
+
+            <input type="text" class="form-control" name="song" placeholder="Search song ...">
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+          </div>
+        <form>
+    </nav>
+
+    <!-- Featured Section -->
+    {% comment %} <section class="container mt-3">
+        <h2 class="text-center">Featured Artists</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'mysport/images/artist1.jpg' %}" class="card-img-top" alt="Artist 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Artist 1</h5>
+                        <p class="card-text">A brief bio about Artist 1.</p>
+                        <a href="artist/" class="btn btn-primary me-5">View Album</a>
+                        <a href="artist/" class="btn btn-primary">View Songs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'mysport/images/artist2.jpg' %}" class="card-img-top" alt="Artist 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Artist 2</h5>
+                        <p class="card-text">A brief bio about Artist 2.</p>
+                        <a href="artist/" class="btn btn-primary me-5">View Album</a>
+                        <a href="artist/" class="btn btn-primary">View Songs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'mysport/images/artist3.jpg' %}" class="card-img-top" alt="Artist 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Artist 3</h5>
+                        <p class="card-text">A brief bio about Artist 3.</p>
+                        <a href="#" class="btn btn-primary me-5">View Album</a>
+                        <a href="artist/" class="btn btn-primary">View Songs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> {% endcomment %}
+ 
+        
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{% static 'images/Royalty-Free Vector Images (over 40_1 million) - Page 26.jpeg' %}" class="card-img-top" alt="Artist">
+                    <div class="card-body">
+                        <h5 class="card-title" >Artist Section</h5>
+                        <p class="card-text">Add or view your favorite artists.</p>
+                        <a href="{% url 'index' %}" class="btn btn-primary btn-block1">Go to Artists</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{% static 'images/Lp record icon gramophone music object vector image on VectorStock.jpeg' %}" class="card-img-top" alt="Albums">
+                    <div class="card-body">
+                        <h5 class="card-title">Albums Section</h5>
+                        <p class="card-text">Browse through different albums.</p>
+                        <a href="{% url 'album' %}" class="btn btn-primary btn-block1">Explore Albums</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{% static 'images/Headphone Silhouette PNG Free, Headphone Icon Design Template Vector, Template Icons, Design, Icon PNG Image For Free Download.jpeg' %}" class="card-img-top" alt="Songs">
+                    <div class="card-body">
+                        <h5 class="card-title">Songs Section</h5>
+                        <p class="card-text">Discover new songs.</p>
+                        <a href="{% url 'music' %}" class="btn btn-primary btn-block1" style="text-align: center;">Listen to Songs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-white text-center py-1">
+        <p>&copy; 2024 Victor. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

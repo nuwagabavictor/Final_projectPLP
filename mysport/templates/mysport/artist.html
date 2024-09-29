@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VicSpotify</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'mysport/style.css' %}">
+</head>
+<body style="background-image: url('{% static 'images/vic.jpeg' %}'); background-size: cover; background-position: center; height: 100vh;">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg " style="background-color: rgb(18, 33, 198);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}" style="color: white;">Music Platform</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                {% block sidebar %}
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url "home" %}" style="color: blue;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "index" %}" style="color: blue;">Artists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'album' %}" style="color: blue;">Albums</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'music' %}" style="color: blue;">Songs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'log' %}" style="color: blue;">LogOut</a>
+                    </li>
+                </ul>
+                {% endblock sidebar %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="display-4" style="color: white;">Artists</h1>
+                <p class="lead" style="color: white;">Welcome to our Music Platform</p>
+            </div>
+        </div>
+
+        <!-- Dynamic Content Section -->
+        <div class="row mt-4">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 style="text-align: center;">Best Artists</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>The Platform has the following Artists:</p>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <strong>Artists:</strong>
+                                <ul>
+                                    {% for x in artists %}
+                                    <li>{{x.Name}}</li>
+                                    
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Artist Bio:</strong>
+                                <ul>
+                                    {% for x in artists %}
+                                    <li>{{x.bio}}</li>
+                                    
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Available Artists:</strong> {{ num_artists }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="row mt-2">
+            <div class="col-md-8 offset-md-2">
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for x in artists %}
+                        <li class="list-group-item">
+                            <strong>{{ x.Name }}</strong>
+                            <div class="mt-2">
+                                <a href="{% url 'delete_object' 'artist' x.id %}" class="btn btn-danger mx-2">Delete Artist</a>
+                                <a href="{% url 'update_artist' x.id %}" class="btn btn-warning mx-2">Update Artist</a>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <a href="{% url 'add' %}" class="btn btn-success mx-2">Add Artist</a>
+                </div>
+            </div>
+        </div>
+
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
