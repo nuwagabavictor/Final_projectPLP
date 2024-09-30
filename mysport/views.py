@@ -246,10 +246,6 @@ def create_album(request):
 
 # api integration
 
-import urllib.request
-import json
-from django.shortcuts import render
-
 # My Spotify API key
 SPOTIFY_API_KEY = '39ad41994d4048e9b6263342d2480423'
 
