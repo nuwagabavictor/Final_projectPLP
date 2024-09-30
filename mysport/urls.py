@@ -16,7 +16,8 @@ urlpatterns = [
     path('album/', views.album, name='album'),
     path('music/', views.music, name='music'),
     path('create-song/', views.create_song, name='create_song'),
-    path('create_album/', views.create_album, name='create_album')
+    path('create_album/', views.create_album, name='create_album'),
+    path('sport/', views.sport, name='sport')
     
     
     

@@ -1,4 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
+import json
+import urllib.request
+import urllib.parse
 from .forms import SongForm, AlbumForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -240,7 +243,60 @@ def create_album(request):
     else:
         form =AlbumForm()
     return render(request, 'mysport/create_album.html', {'form': form})
-     
 
+# api integration
 
+import urllib.request
+import json
+from django.shortcuts import render
 
+# My Spotify API key
+SPOTIFY_API_KEY = '39ad41994d4048e9b6263342d2480423'
+
+def sport(request):
+    data = {}
+
+    if request.method == 'POST':
+        # Get the search term from the form
+        search_query = request.POST['search_query']
+        
+        # Encode the search query to make it URL-safe 
+        encoded_search_query = urllib.parse.quote(search_query)
+
+        # Spotify API endpoint for searching tracks, albums, or artists
+        spotify_url = f'https://api.spotify.com/v1/search?q={encoded_search_query}&type=track&limit=10'
+
+        # Request headers with authorization
+        headers = {
+            'Authorization': f'Bearer {SPOTIFY_API_KEY}'
+        }
+
+        # Creating the request object
+        req = urllib.request.Request(spotify_url, headers=headers)
+
+        try:
+            # Make the API request and read the response
+            with urllib.request.urlopen(req) as response:
+                source = response.read()
+
+            # Parsing the JSON response
+            list_of_data = json.loads(source)
+
+            # Extract data (e.g., the first track from the search results)
+            if list_of_data['tracks']['items']:
+                first_result = list_of_data['tracks']['items'][0]
+                data = {
+                    'track_name': first_result['name'],
+                    'artist_name': first_result['artists'][0]['name'],
+                    'album_name': first_result['album']['name'],
+                    'track_url': first_result['external_urls']['spotify'],
+                    'track_image': first_result['album']['images'][0]['url'],
+                }
+            else:
+                data = {'error': 'No results found.'}
+
+        except urllib.error.URLError as e:
+            # Handle API request error
+            data = {'error': f'Failed to connect to Spotify API: {e}'}
+
+    return render(request, "mysport/index.html", data)

@@ -51,21 +51,31 @@
         <div class="container">
             <h1 class="display-6">Welcome to Our Music Platform</h1>
             <p class="lead">Discover, listen, and share your favorite music with the world.</p>
-            <a href="{% url 'music' %}" class="btn btn-primary btn-lg">Explore Music</a>
+            <a href="{% url 'sport' %}" class="btn btn-primary btn-lg">Explore Music</a>
         </div>
     </header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <form method="get" class="col-md">
+    {% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <form method="POST" class="col-md">
           {% csrf_token %}
           <div class=" input-group mb-0">
 
-            <input type="text" class="form-control" name="song" placeholder="Search song ...">
+            <input type="text" class="form-control" name="search_query" placeholder="Search for a track ...">
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
           </div>
         <form>
-    </nav>
+            {% if track_name %}
+                <h2>Track: {{ track_name }}</h2>
+                <p>Artist: {{ artist_name }}</p>
+                <p>Album: {{ album_name }}</p>
+                <a href="{{ track_url }}" target="_blank">Listen on Spotify</a>
+                <img src="{{ track_image }}" alt="Album Art" width="200">
+            {% elif error %}
+                <p>{{ error }}</p>
+            {% endif %}
+
+    </nav> {% endcomment %}
 
     <!-- Featured Section -->
     {% comment %} <section class="container mt-3">

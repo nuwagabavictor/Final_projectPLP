@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Search</title>
+    <link rel="stylesheet" href="{% static 'mysport/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <h1 style="color: white; text-align: center; margin-bottom: 30px;">Spotify Track Search</h1>
+
+    <!-- Search form -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <form method="POST" class="col-md">
+          {% csrf_token %}
+          <div class=" input-group mb-0">
+
+            <input type="text" class="form-control" name="search_query" placeholder="Search for a track ...">
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+          </div>
+        <form>
+    </nav>
+    <div id="hmbtn">
+        <a href="{% url 'home' %}" class="btn btn-block" style="width: 300px; background-color: blue; color: white; margin-left: 500px; margin-top: 30px;">Back to Home</a>  
+    </div>
+
+        
+      
+
+    <!-- Display search results -->
+    {% if track_name %}
+        <h2>Track: {{ track_name }}</h2>
+        <p>Artist: {{ artist_name }}</p>
+        <p>Album: {{ album_name }}</p>
+        <a href="{{ track_url }}" target="_blank">Listen on Spotify</a>
+        <img src="{{ track_image }}" alt="Album Art" width="200">
+    {% elif error %}
+        <p style="color: white;">{{ error }}</p>
+    {% endif %}
+        
+   
+
+</body>
+</html>
